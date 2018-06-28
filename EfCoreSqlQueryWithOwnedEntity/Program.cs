@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Linq;
+using static System.Console;
 
 namespace EfCoreSqlQueryWithOwnedEntity
 {
@@ -6,7 +7,29 @@ namespace EfCoreSqlQueryWithOwnedEntity
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using (var context = new BookDbContext())
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                var a1 = new Author { Name = new Name { First = "Michel", Last = "aus Lönneberga" } };
+                var a2 = new Author { Name = new Name { First = "Pippi", Last = "Langstrumpf" } };
+                context.Authors.AddRange(a1, a2);
+                context.SaveChanges();
+            }
+
+            QueryWithOwnedTypeTest();
+            ReadKey();
+        }
+
+        private static void QueryWithOwnedTypeTest()
+        {
+            using (var context = new BookDbContext(useLogging: true))
+            {
+                var authors = context.Authors.ToList();
+
+                authors.ForEach(a => WriteLine($"{a.Name.First,-6} {a.Name.Last}"));
+            }
         }
     }
 }
