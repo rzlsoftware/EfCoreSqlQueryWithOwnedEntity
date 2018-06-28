@@ -1,6 +1,6 @@
 # EfCoreSqlQueryWithOwnedEntity
 
-Sample project for [Ef Core Issue 12491](https://github.com/aspnet/EntityFrameworkCore/issues/12491)
+Sample project for [Ef Core Issue 12491](https://github.com/aspnet/EntityFrameworkCore/issues/12491)  
 When querying tables with [Owned Entities](https://docs.microsoft.com/en-us/ef/core/modeling/owned-entities) Ef Core 2.1.1 creates a SQL statement that asks twice for Id column.
 
 ```csharp
