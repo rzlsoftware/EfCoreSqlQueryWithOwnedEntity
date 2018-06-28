@@ -12,12 +12,13 @@ public class Author
 {
     public int Id { get; set; }
     public Name Name { get; set; }
+    public string Description { get; set; }
 }
 ```
 
 `context.Authors.ToList()` creates this SQL query:
 ```sql
-SELECT [a].[Id], [a].[Id], [a].[Firstname], [a].[Lastname]
+SELECT [a].[Id], [a].[Id], [a].[Firstname], [a].[Lastname], [a].[Description]
 FROM [Authors] AS [a]
 ```
 with two times `[a].[Id]`
