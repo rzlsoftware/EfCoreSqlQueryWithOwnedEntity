@@ -26,7 +26,7 @@ namespace EfCoreSqlQueryWithOwnedEntity
         {
             using (var context = new BookDbContext(useLogging: true))
             {
-                var authors = context.Authors.ToList();
+                var authors = context.Authors.ToList();     // Select query asks two times for Id: SELECT [a].[Id], [a].[Id], [a].[Firstname], [a].[Lastname]
 
                 authors.ForEach(a => WriteLine($"{a.Name.First,-6} {a.Name.Last}"));
             }
