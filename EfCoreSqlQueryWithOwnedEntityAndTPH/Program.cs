@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Z.EntityFramework.Plus;
 using static System.Console;
 
 namespace EfCoreSqlQueryWithOwnedEntityAndTPH
@@ -28,7 +29,7 @@ namespace EfCoreSqlQueryWithOwnedEntityAndTPH
         {
             using (var context = new BookDbContext(useLogging: true))
             {
-                var people = context.People.ToList();     // Select query asks two times for Id:
+                var people = context.People.ToList();     // Select query asks two times for Id: SELECT [p].[Id], [p].[Type], [p].[Description], [p].[AmountConsumed], [t].[Id], [t].[Firstname], [t].[Lastname]
 
                 people.ForEach(a => WriteLine($"{a.Name.First,-6} {a.Name.Last}"));
             }
